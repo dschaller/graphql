@@ -130,7 +130,7 @@ func (d *decoder) decode() error {
 					}
 					someSliceExist = true
 				}
-				if f != nil {
+				if !f.isNil() {
 					d.vs[i] = append(d.vs[i], f)
 				}
 			}
