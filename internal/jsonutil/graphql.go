@@ -125,10 +125,14 @@ func (d *decoder) decode() error {
 				var f reflect.Value
 				if v.Kind() == reflect.Slice {
 					v.Set(reflect.Append(v, reflect.Zero(v.Type().Elem()))) // v = append(v, T).
-					f = v.Index(v.Len() - 1)
+					if v.Len() > 0 {
+						f = v.Index(v.Len() - 1)
+					}
 					someSliceExist = true
 				}
-				d.vs[i] = append(d.vs[i], f)
+				if f != nil {
+					d.vs[i] = append(d.vs[i], f)
+				}
 			}
 			if !someSliceExist {
 				return fmt.Errorf("slice doesn't exist in any of %v places to unmarshal", len(d.vs))
