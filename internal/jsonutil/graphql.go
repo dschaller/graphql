@@ -130,9 +130,7 @@ func (d *decoder) decode() error {
 					}
 					someSliceExist = true
 				}
-				if f.IsValid() && !f.IsZero() {
-					d.vs[i] = append(d.vs[i], f)
-				}
+				d.vs[i] = append(d.vs[i], f)
 			}
 			if !someSliceExist {
 				return fmt.Errorf("slice doesn't exist in any of %v places to unmarshal", len(d.vs))
