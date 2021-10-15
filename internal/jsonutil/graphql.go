@@ -127,6 +127,8 @@ func (d *decoder) decode() error {
 					v.Set(reflect.Append(v, reflect.Zero(v.Type().Elem()))) // v = append(v, T).
 					if v.Len() > 0 {
 						f = v.Index(v.Len() - 1)
+					} else if v.Len() == 0 {
+						f = v.Index(0)
 					}
 					someSliceExist = true
 				}
